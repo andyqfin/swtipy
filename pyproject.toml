@@ -1,0 +1,5 @@
+[project]
+name = "hello-world-pypi"
+version = "0.1.0"
+authors = [{name = "Your Name"}]
+description = "Hello World"
