@@ -1,5 +1,5 @@
 [project]
-name = "hello-world-pypi"
+name = "swtipy"
 version = "0.1.0"
-authors = [{name = "Your Name"}]
+authors = [{name = "Man Chung Yuen"}]
 description = "Hello World"
