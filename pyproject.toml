@@ -12,3 +12,9 @@ requires-python = ">=3.8"
 authors = [
   { name="Andy", email="youremail@example.com" }
 ]
+
+# 添加这部分配置
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["swtipy*"]
+exclude = ["tests*", "test*"]
