@@ -7,10 +7,13 @@ release = "0.1.0"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
-    "sphinx.ext.autodoc",      # 自動讀取 Python docstring
-    "sphinx.ext.napoleon",     # 支援 Google/NumPy style docstring
-    "sphinx.ext.viewcode",     # 在文件裡顯示原始碼連結
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.autosummary",   # ← 加上這行
 ]
+
+autosummary_generate = True  # 自動生成 API 條目
 
 templates_path = ["_templates"]
 exclude_patterns = []
