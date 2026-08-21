@@ -13,6 +13,8 @@ def create_folder(folder_name, sub_folder_name):
     return subfolder_path
 
 class de_numpy_parallel():
+    
+"""Differential Evolution with NumPy parallelization."""
 
     def __init__(self, fobj, fobj_single, dim, *args, file=None, filenum = None,
                  popsize=100, mut=(0.5, 1), crossp=0.7, atol=0.0, tol=1e-2, iterdisp=1000, showTime=True):
