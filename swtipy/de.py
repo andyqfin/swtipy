@@ -162,7 +162,7 @@ class de_numpy_parallel():
             cross_points[self.idx, np.random.randint(0, self.dim, self.popsize)] |= np.all(~cross_points, axis=1)
             self.trial = np.where(cross_points, mutant, self.pop)
 
-            update_best(self.trial)
+            update_best()
 
             print_and_log()
 
