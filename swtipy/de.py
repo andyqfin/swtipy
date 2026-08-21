@@ -40,6 +40,8 @@ class de_numpy_parallel():
         self.iterations = 0
         self.check = False
 
+        self.pop_denorm = None
+
         self.pop = np.random.rand(self.popsize, self.dim)
         (self.min_b, self.max_b) = np.array([(0, 1)] * self.dim).T
         self.idx = np.arange(self.popsize)
@@ -54,6 +56,8 @@ class de_numpy_parallel():
         self.res = None
 
     def parallel_fit(self):
+
+        self.pop_denorm = self.min_b + self.pop * np.fabs(self.min_b - self.max_b)
 
         fit = np.array(
             Parallel(n_jobs=-1)(
@@ -140,7 +144,7 @@ class de_numpy_parallel():
 
         save_info()
 
-        self.fit = self.fobj(self.min_b + self.pop * np.fabs(self.min_b - self.max_b), *self.args)
+        self.fit = self.fobj()
         print(f'running DE, pop:{self.popsize}')
 
         if self.showTime == True:
