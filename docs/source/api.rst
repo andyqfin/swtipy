@@ -1,8 +1,8 @@
 API Reference
 =============
 
-.. autosummary::
-   :toctree: generated
-   :recursive:
-
-   swtipy
+.. automodule:: swtipy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :inherited-members:
