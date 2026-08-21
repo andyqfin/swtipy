@@ -14,10 +14,10 @@ class de_numpy_parallel():
         self.filenum = filenum
 
         if filenum is None:
-            filenum = 1
+            self.filenum = 1
 
         if file is None:
-            file = 'result'
+            self.file = 'result'
 
         subfolder_path = self.create_folder()
         filepath = os.path.join(subfolder_path, f"result_de_{filenum}.pkl")
