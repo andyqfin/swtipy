@@ -3,3 +3,4 @@ name = "swtipy"
 version = "0.1.1"
 authors = [{name = "Man Chung Yuen"}]
 description = "sliding window for technical indicators that implemented by python"
+long_description = "sliding window for technical indicators that implemented by python"
