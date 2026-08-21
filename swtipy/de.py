@@ -3,7 +3,6 @@ import pickle
 import time
 import numpy as np
 
-
 class de_numpy_parallel():
 
     def __init__(self, fobj, fobj_single, dim, *args, file=None, filenum = None,
@@ -13,15 +12,15 @@ class de_numpy_parallel():
         self.end_time = None
         self.filenum = filenum
 
-        if filenum is None:
+        if self.filenum is None:
             self.filenum = 1
 
         if file is None:
             self.file = 'result'
 
         subfolder_path = self.create_folder()
-        filepath = os.path.join(subfolder_path, f"result_de_{filenum}.pkl")
-        logpath = os.path.join(subfolder_path, f"log_de_{filenum}.log")
+        filepath = os.path.join(subfolder_path, f"result_de_{self.filenum}.pkl")
+        logpath = os.path.join(subfolder_path, f"log_de_{self.filenum}.log")
 
         self.filepath = filepath
         self.logpath = logpath
