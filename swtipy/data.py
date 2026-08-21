@@ -17,8 +17,8 @@ class stocksdata():
         self.startdate = startdate
         self.enddate = enddate
 
-        self.year = str(datetime.strptime(self.startdate, "%Y-%m-%d").year)
-        self.year2 = str(datetime.strptime(self.enddate, "%Y-%m-%d").year)
+        self.year = str(datetime.datetime.strptime(self.startdate, "%Y-%m-%d").year)
+        self.year2 = str(datetime.datetime.strptime(self.enddate, "%Y-%m-%d").year)
 
         self.basic_data = None
 
