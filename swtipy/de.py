@@ -3,26 +3,9 @@ import pickle
 import time
 import numpy as np
 
-__all__ = ["de_numpy_parallel"]
-
-def create_folder(folder_name, sub_folder_name):
-
-    os.makedirs(folder_name, exist_ok=True)
-    subfolder_path = os.path.join(folder_name, sub_folder_name)
-    os.makedirs(subfolder_path, exist_ok=True)
-    print(f"sub folder '{folder_name}/{sub_folder_name}' created")
-
-    return subfolder_path
 
 class de_numpy_parallel():
-    
-    """
-    Differential Evolution with NumPy parallelization.
 
-    This class implements a parallelized Differential Evolution (DE) algorithm
-    using NumPy for efficient population-based optimization.
-    """
-    
     def __init__(self, fobj, fobj_single, dim, *args, file=None, filenum = None,
                  popsize=100, mut=(0.5, 1), crossp=0.7, atol=0.0, tol=1e-2, iterdisp=1000, showTime=True):
 
@@ -36,7 +19,7 @@ class de_numpy_parallel():
         if file is None:
             file = 'result'
 
-        subfolder_path = create_folder(file, f'{file}_{filenum}')
+        subfolder_path = self.create_folder()
         filepath = os.path.join(subfolder_path, f"result_de_{filenum}.pkl")
         logpath = os.path.join(subfolder_path, f"log_de_{filenum}.log")
 
@@ -67,6 +50,17 @@ class de_numpy_parallel():
 
         self.args = args
         self.res = None
+
+    def create_folder(self):
+
+        sub_folder_name = f'{self.file}_{self.filenum}'
+
+        os.makedirs(self.file, exist_ok=True)
+        subfolder_path = os.path.join(self.file, sub_folder_name)
+        os.makedirs(subfolder_path, exist_ok=True)
+        print(f"sub folder '{self.file}/{sub_folder_name}' created")
+
+        return subfolder_path
 
     def de_process(self):
 
