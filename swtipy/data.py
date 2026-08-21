@@ -9,7 +9,7 @@ from .swti import SWTI
 
 class stocksdata():
 
-    def __init__(self, startdate, enddate, basic_data, period=[2, 5, 10, 20], raw = 'stock', raw2 = 'sp100'):
+    def __init__(self, startdate, enddate, period=[2, 5, 10, 20], raw = 'stock', raw2 = 'sp100'):
 
         self.raw = raw
         self.period = period
@@ -20,7 +20,7 @@ class stocksdata():
         self.year = str(datetime.strptime(self.startdate, "%Y-%m-%d").year)
         self.year2 = str(datetime.strptime(self.enddate, "%Y-%m-%d").year)
 
-        self.basic_data = basic_data
+        self.basic_data = None
 
         self.raw = f'{raw}_{self.year}_{self.year2}'
         self.raw2 = f'{raw2}_{self.year}_{self.year2}'
@@ -32,12 +32,12 @@ class stocksdata():
 
         return indicators
 
-    def load_data_triple_screen(self):
+    def load_data_multi_screen(self):
 
         org_data = self.load_data()
         # ben_data = load_data(ben_period, start_date, end_date)
 
-        basic_data = org_data
+        self.basic_data = org_data
 
         path = 'saved_values.pkl'
         if os.path.exists(path):
@@ -46,7 +46,7 @@ class stocksdata():
             values = self.triple_screen()
             pickle.dump(values, open(path, 'wb'))
 
-        return values, basic_data
+        return values, self.basic_data
 
     def load_data(self):
 
