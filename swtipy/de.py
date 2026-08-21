@@ -98,7 +98,7 @@ class de_numpy_parallel():
                     f.write(line + "\n")
 
                 self.fobj_single(self.pop[self.best_idx], True, *self.args)
-                self.show_elapsed()
+                show_elapsed()
 
         def show_elapsed():
 
