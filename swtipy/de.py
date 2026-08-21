@@ -3,6 +3,8 @@ import pickle
 import time
 import numpy as np
 
+__all__ = ["de_numpy_parallel"]
+
 def create_folder(folder_name, sub_folder_name):
 
     os.makedirs(folder_name, exist_ok=True)
@@ -14,8 +16,13 @@ def create_folder(folder_name, sub_folder_name):
 
 class de_numpy_parallel():
     
-"""Differential Evolution with NumPy parallelization."""
+    """
+    Differential Evolution with NumPy parallelization.
 
+    This class implements a parallelized Differential Evolution (DE) algorithm
+    using NumPy for efficient population-based optimization.
+    """
+    
     def __init__(self, fobj, fobj_single, dim, *args, file=None, filenum = None,
                  popsize=100, mut=(0.5, 1), crossp=0.7, atol=0.0, tol=1e-2, iterdisp=1000, showTime=True):
 
