@@ -2,10 +2,11 @@ import os
 import pickle
 import time
 import numpy as np
+from joblib import Parallel, delayed
 
 class de_numpy_parallel():
 
-    def __init__(self, fobj, fobj_single, dim, *args, file=None, filenum = None,
+    def __init__(self, fobj_single, dim, *args, file=None, filenum = None,
                  popsize=100, mut=(0.5, 1), crossp=0.7, atol=0.0, tol=1e-2, iterdisp=1000, showTime=True):
 
         self.start_time = None
@@ -33,8 +34,8 @@ class de_numpy_parallel():
         self.iterdisp = iterdisp
         self.showTime = showTime
 
-        self.fobj = fobj
         self.fobj_single = fobj_single
+        self.fobj = self.parallel_fit
 
         self.iterations = 0
         self.check = False
@@ -43,12 +44,25 @@ class de_numpy_parallel():
         (self.min_b, self.max_b) = np.array([(0, 1)] * self.dim).T
         self.idx = np.arange(self.popsize)
 
+        self.trial = None
+
         self.fit = None
         self.best_idx = None
         self.best = None
 
         self.args = args
         self.res = None
+
+    def parallel_fit(self):
+
+        fit = np.array(
+            Parallel(n_jobs=-1)(
+                delayed(self.fobj_single)(self.trial_id, *self.args)
+                for self.trial_id in self.pop_denorm
+            )
+        )
+
+        return fit
 
     def create_folder(self):
 
@@ -75,12 +89,12 @@ class de_numpy_parallel():
 
             print("Saved parameters to:", self.filepath)
 
-        def update_best(trial):
+        def update_best():
 
-            f = self.fobj(trial, *self.args)
+            f = self.fobj()
             improved = f < self.fit
             self.fit[improved] = f[improved]
-            self.pop[improved] = trial[improved]
+            self.pop[improved] = self.trial[improved]
 
             self.best_idx = self.fit.argmin()
             self.best = self.pop[self.best_idx]
@@ -107,7 +121,7 @@ class de_numpy_parallel():
                 with open(self.logpath, "a") as f:
                     f.write(line + "\n")
 
-                self.fobj_single(self.pop[self.best_idx], True, *self.args)
+                self.fobj_single(self.pop[self.best_idx], *self.args)
                 show_elapsed()
 
         def show_elapsed():
@@ -142,9 +156,9 @@ class de_numpy_parallel():
 
             cross_points = np.random.rand(self.popsize, self.dim) < self.crossp
             cross_points[self.idx, np.random.randint(0, self.dim, self.popsize)] |= np.all(~cross_points, axis=1)
-            trial = np.where(cross_points, mutant, self.pop)
+            self.trial = np.where(cross_points, mutant, self.pop)
 
-            update_best(trial)
+            update_best(self.trial)
 
             print_and_log()
 
