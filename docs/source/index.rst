@@ -10,7 +10,6 @@ including how to get started with the project.
 
    This project is under active development.
 
-Contents
 --------
 
 .. toctree::
