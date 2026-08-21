@@ -2,7 +2,15 @@ import os
 import pickle
 import time
 import numpy as np
-from os_control import create_folder
+
+def create_folder(folder_name, sub_folder_name):
+
+    os.makedirs(folder_name, exist_ok=True)
+    subfolder_path = os.path.join(folder_name, sub_folder_name)
+    os.makedirs(subfolder_path, exist_ok=True)
+    print(f"sub folder '{folder_name}/{sub_folder_name}' created")
+
+    return subfolder_path
 
 class de_numpy_parallel():
 
