@@ -5,7 +5,7 @@ from functools import reduce
 
 from .de import de_numpy_parallel
 
-__all__ = ["de_numpy_parallel"]
+__all__ = ["SWTI", "ema_func", "de_numpy_parallel"]
 
 @njit(fastmath=True, cache=True)
 def ema_func(x):
