@@ -1,5 +1,5 @@
 [project]
 name = "swtipy"
-version = "0.2.0"
+version = "0.1.0"
 authors = [{name = "Man Chung Yuen"}]
 description = "sliding window for technical indicators that implemented by python"
