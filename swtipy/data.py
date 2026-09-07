@@ -43,7 +43,7 @@ class stocksdata():
         if os.path.exists(path):
             values = pickle.load(open(path, 'rb'))
         else:
-            values = self.triple_screen()
+            values = self.multi_screen()
             pickle.dump(values, open(path, 'wb'))
 
         return values, self.basic_data
