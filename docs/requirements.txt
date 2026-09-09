@@ -2,3 +2,4 @@ sphinx>=7.1,<8
 sphinx-rtd-theme
 numpy>=1.25,<2
 numba>=0.59
+joblib
